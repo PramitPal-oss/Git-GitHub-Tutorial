@@ -164,24 +164,26 @@ commit. You've saved the file(only`ctrl +s` Not commiting or adding) but then re
 8. `git reset --hard <commit>` : If you want to undo both the commits AND the actual changes in your files, you can use the `--hard`
    option. for example, `git reset --hard HEAD~1` will delete the last commit and associated changes.
 
-# GitHUB
+# GitHUB Basics :
 
 Github is a hosting platform for git repositories. You can put your own Git repos on Github and access them from anywhere and share them with people around the world. Beyond hosting repos, Github also provides additional collaboration features that are not native to Git (but are super useful). Basically, Github helps people share and collaborate on repos.
 
-`git clone <url>` : Clone a github repo.
+1. `git clone <url>` => Clone a github repo.
 
-`git remote -v` (checking if the remote exits)
+2. `git remote -v` => checking if the remote exits
 
-`git remote add origin <url>` :(You can give any name other than `origin` But it is a convention so please follow along )
+3. `git remote add origin <url>` => You can give any name other than `origin` But it is a convention so please follow along
 
-`git push <remote> <branch Name>` => `git push origin <branch Name>` (origin is remote name. In this case when first time running this for `push` github will make a new repo name master and push my code to there. Remember : the master brach is available in our local machine not in github so github has to make this branch before pushing my code. that's why after finish pushing it says
-`master -> master` )
+4. `git push <remote> <branch Name>` => `git push origin <branch Name>` origin is remote name. In this case when first time running this for `push`
+   github will make a new repo name master and push my code to there. Remember : the master brach is available in our local machine not in github so github has to make this branch before pushing my code. that's why after finish pushing it says `master -> master`.
 
-`git push origin try:main` (pushing in a diffrent git branch. In this case the point willbe `try -> main`. Basically `try` branch is our local machine and it will create `main` branch in github)
+5. `git push origin try:main`=> pushing in a diffrent git branch. In this case the point willbe `try -> main`. Basically `try` branch is our local
+   machine and it will create `main` branch in github.
 
-`git push -u <remote> <branch name>` : The -u option allows us to set the upstream of the branch we're pushing You can think of this as a link connecting our local branch to a branch on Github. Running git push -u origin master sets the upstream of the local master branch so that it tracks the master branch on the origin repo. Once we've set the upstream for a branch, we can use the only `git push` shorthand which will push our current branch to the upstream.
+6. `git push -u <remote> <branch name>` => The -u option allows us to set the upstream of the branch we're pushing You can think of this as a link
+   connecting our local branch to a branch on Github. Running git push -u origin master sets the upstream of the local master branch so that it tracks the master branch on the origin repo. Once we've set the upstream for a branch, we can use the only `git push` shorthand which will push our current branch to the upstream.
 
-_Another way of using git_ :
+# GitHub Fetching and Pulling
 
 1. When You start working on a project just make a repo on GitHub.
 
@@ -191,11 +193,31 @@ _Another way of using git_ :
 
 4. start working the project.
 
-5. `git add .` => `git commit -m "<commit message>"` => `git push` . Because the remote and upstream already set to the branch so `git push` command will works here. or You can use `git push origin <branch name>`.
+5. `git add .` => `git commit -m "<commit message>"` => `git push` . Because the remote and upstream already set to the branch so `git push` command
+   will works here. or You can use `git push origin <branch name>`.
 
-`git branch -r`(Run git branch -r to view the remote branches our local repository knows about.) Expected O/p : origin/master
-`git fetch origin`(fetch all the chnages but doesn't messed up our working directry)  
-`git fetch origin <branchName>` (fetch all the chnages in a perticular but doesn't messed up our working directry)
-`git checkout <branch Name from git branch -r>`: Example :`git checkout origin/fantasy` (for check chnages on that branch)  
-`git switch <branchname>`(switch to that branch)
-`git pull origin <branch name>` (fetch and merge all the changes in our working directry and working branch. So becareful about that this will merge changes in current branch. If don't want that just change the branch to anyother using `git switch <branch name>` )
+6. `git branch -r` => Run git branch -r to view the remote branches our local repository knows about. Expected O/p : origin/master
+
+7. `git fetch origin` => fetch all the chnages but doesn't messed up our working directry
+
+8. `git fetch origin <branchName>` => fetch all the chnages in a perticular but doesn't messed up our working directry.
+
+9. `git checkout <branch Name from git branch -r>` => Example :`git checkout origin/fantasy` for check chnages on that branch.
+
+10. `git switch <branchname>` => switch to that branch.
+
+11. `git pull origin <branch name>` => fetch and merge all the changes in our working directry and working branch. So becareful about that this will
+    merge changes in current branch. If don't want that just change the branch to anyother using `git switch <branch name>`.
+
+# GIT REBASE :
+
+There are two main ways to use the git rebase command:
+
+- as an alternative to merging
+- as a cleanup tool
+
+`git rebase <branch Name>` : Suppose we have two branches master and feature. And two developer works on that two branch. So Each and every time the feature branch developer need the changes happening on master branch. So he just merge all the time. This makes his commit history messy. Insted of merging he can use `rebase`. We can instead rebase the feature branch onto the master branch. This moves the entire feature branch so that it BEGINS at
+the tip of the master branch. All of the work is still there, but **we have re-written history**. Instead of using a merge commit, rebasing rewrites history by creating new commits for each of the original feature branch commits.
+
+**Why Rebase?**
+We get a much cleaner project history. No unnecessary merge commits! We end up with a linear project history.
